@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-3 col-md-3 col-xl-2 col-sm-2 px-sm-2 px-0">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none row">
+                    <span class="fs-5 d-none d-sm-inline text-center">
+                        <img class="col-lg-3 col-md-4 col-sm-6" src="../../assets/images/logo.png" alt="Logo" />
+                    </span>
+                </a>    
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+
+                    <li class="nav-item">
+                        <a class="nav-link px-0 text-dark text-decoration-none" routerLink="/dashboard" routerLinkActive="">
+                            <i class="fa-solid fa-chart-line p-1" ></i>
+                            <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-0 text-dark text-decoration-none" routerLink="/login" routerLinkActive="">
+                            <i class="fa-solid fa-right-to-bracket p-1"></i>
+                            <span class="ms-1 d-none d-sm-inline">Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-0 text-dark text-decoration-none" routerLink="/newMerchent" routerLinkActive="">
+
+                            <i class="fa-solid fa-plus p-1  "></i>
+                            <span class="ms-1 d-none d-sm-inline">Create new Merchent</span>
+                        </a>
+                    </li>
+                 
+                </ul>
+         
+            </div>
+        </div>
+        <div class="col  bg-light">
+           <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
