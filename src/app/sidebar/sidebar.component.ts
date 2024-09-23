@@ -12,7 +12,7 @@ export class SidebarComponent {
 
   _AuthService.userProfile.subscribe({
     next:()=>{
-      if(_AuthService.userProfile.getValue()!==null){
+      if(_AuthService.userProfile.getValue() !== null){
         this.isLogin = true;
       }
       else{

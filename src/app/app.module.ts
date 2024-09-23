@@ -11,6 +11,7 @@ import { ForgetpassComponent } from './forgetpass/forgetpass.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatenewComponent } from './createnew/createnew.component';
+import { UsersComponent } from './users/users.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CreatenewComponent } from './createnew/createnew.component';
     ForgetpassComponent,
     NotfoundComponent,
     DashboardComponent,
-    CreatenewComponent
+    CreatenewComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

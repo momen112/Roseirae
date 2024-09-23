@@ -1,28 +1,48 @@
-.loginBackground{
-    background-size: cover; /* Cover the entire area */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent tiling */
-   
+.loginBackground {
+  background-size: cover;
+  /* Cover the entire area */
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Prevent tiling */
+
 }
+
 .overlayBackground {
-    background-color: rgba(0, 0, 0, 0.5); /* Optional overlay */
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
-  .roseirie-background{
-    background-color: #09BBF0;
-  }
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Optional overlay */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.roseirie-background {
+  background-color: #09BBF0;
+}
 
 
-  .formHolder{
-    background-image: url('../../assets/images/logo-opacity-90.png');
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent tiling */
-    background-size: 45%;
-    
-    }
-  
+.formHolder {
+  background-image: url('../../assets/images/logo-opacity-90.png');
+  background-position: center;
+  /* Center the image */
+  background-repeat: no-repeat;
+  /* Prevent tiling */
+  background-size: 45%;
+
+}
+
+
+.login-logo {
+  margin-bottom: 15px;
+} 
+
+.login-content {
+  max-width: 540px;
+  margin: 8vh auto;
+}
+.login-conent-parent{
+  background-color: #FFFFFF;
+}

@@ -25,17 +25,23 @@ export class LoginComponent {
     this.isloading=true;
     this._AuthService.login(data.value).subscribe({
       next:(response)=>{
-        console.log(response);
-        localStorage.setItem('userToken',response.token);
-        this._AuthService.decodeUserToken();
-        this._Router.navigate(['/dashboard']);
 
+        if (response.token) {
+          localStorage.setItem('userToken', response.token);
+          this._AuthService.decodeUserToken();
+          this._Router.navigate(['/dashboard']);
+        } else {
+          this.errormessage = "Invalid response from server, no token found.";
+          this.isloading = false;
+        }
+
+     
         // here We can Put A popUp For The Wrrong message
       },
       error:(myError)=>{
         console.log(myError);
        this.errormessage =myError.message;
-        this.isloading=true;
+        this.isloading=false;
 
       },
       complete:()=>{

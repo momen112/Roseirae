@@ -12,7 +12,15 @@ export class AuthService {
 
   userProfile= new BehaviorSubject(null);
 
-  constructor(private _HttpClient : HttpClient , private _Router :Router) { }
+  constructor(private _HttpClient : HttpClient , private _Router :Router) {
+    if(localStorage.getItem('userToken') !==null){
+      this.decodeUserToken();
+    }
+    else{
+    this._Router.navigate(['/login'])
+
+    }
+   }
 
 
   private getHeaders(): HttpHeaders {
@@ -25,13 +33,14 @@ export class AuthService {
 
   register(data:FormGroup):Observable <any>{
  
-    return this._HttpClient.post('http://roseirae.runasp.net/api/Users/register' , data,{ headers: this.getHeaders() });
+    return this._HttpClient.post('https://roseirae.runasp.net/api/Users/register' , data,{ headers: this.getHeaders() });
 
   }
 
   login(data:FormGroup):Observable <any>{
     
-    return this._HttpClient.post('http://roseirae.runasp.net/api/Users/login' , data);
+    return this._HttpClient.post('https://roseirae.runasp.net/api/Users/login' , data);
+    
 
   }
 
@@ -39,6 +48,7 @@ export class AuthService {
     let encodedToken: any = localStorage.getItem('userToken');
     if (encodedToken) {
         let decoded: any = jwtDecode(encodedToken);
+        // this.userProfile.next(decoded);
         this.userProfile.next(decoded);
         console.log(decoded);
     }

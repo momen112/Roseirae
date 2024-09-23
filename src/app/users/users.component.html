@@ -1,0 +1,33 @@
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone number</th>
+                <th>Role</th>
+                <th>Operation</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <div class="row d-flex flex-row justify-content-around">
+                        <button class="btn btn-primary col-5" (click)="editUser(user)">Edit</button>
+                        <button class="btn btn-danger col-4" (click)="deleteUser(user)">Delete</button>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+ 
