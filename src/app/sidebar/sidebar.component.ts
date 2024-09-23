@@ -7,6 +7,13 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+  isSidebarOpen = true; // Sidebar is open by default
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+
   isLogin : boolean = false;
  constructor(private  _AuthService :AuthService){
 
@@ -23,5 +30,9 @@ export class SidebarComponent {
  }
  logout(){
   this._AuthService.logout();
+  this.isSidebarOpen = false; // Sidebar is open by default
+  this.isLogin =false; //
+
+
  }
 }

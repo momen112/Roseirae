@@ -1,53 +1,44 @@
 <div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-3 col-md-3 col-xl-2 col-sm-2 px-sm-2 px-0" *ngIf="isLogin" >
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/"
-                    class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none row">
-                    <span class="fs-5 d-none d-sm-inline text-center">
-                        <img class="col-lg-3 col-md-4 col-sm-6" src="../../assets/images/logo.png" alt="Logo" />
-                    </span>
+    <app-login *ngIf="!isLogin"></app-login>
+
+    <div *ngIf="isLogin" class="d-flex">
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper" [ngClass]="{'collapsed': !isSidebarOpen}">
+            <!-- Menu Icon -->
+            <div class="sidebar-heading d-flex justify-content-end p-2">
+                <span class="navbar-toggler-icon" id="menu-icon" (click)="toggleSidebar()" style="cursor: pointer;">
+                    <i class="fa-solid fa-bars"></i>
+                </span>
+            </div>
+            <div class="list-group list-group-flush" *ngIf="isSidebarOpen">
+    
+                <a class="list-group-item list-group-item-action bg-light" routerLink="/dashboard" routerLinkActive="">
+                    <i class="fa-solid fa-chart-line p-1"></i>
+                    <span class="ms-1 ">Dashboard</span>
                 </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-
-                    <li class="nav-item">
-                        <a class="nav-link px-0 text-dark text-decoration-none" routerLink="/dashboard"
-                            routerLinkActive="">
-                            <i class="fa-solid fa-chart-line p-1"></i>
-                            <span class="ms-1 d-none d-sm-inline">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 text-dark text-decoration-none" routerLink="/newMerchent"
-                            routerLinkActive="">
-
-                            <i class="fa-solid fa-plus p-1  "></i>
-                            <span class="ms-1 d-none d-sm-inline">Create new Merchent</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-0 text-dark text-decoration-none" routerLink="/users"
-                            routerLinkActive="">
-                            <i class="fa-regular fa-user p-1"></i>
-                            <span class="ms-1 d-none d-sm-inline">All users</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item ">
-
-                        <a class="nav-link px-0 text-dark text-decoration-none" (click)="logout()"  routerLinkActive="">
-
-                            <i class="fa-solid fa-outdent p-1"></i>
-
-                            <span class="ms-1 d-none d-sm-inline">Logout</span>
-                        </a>
-                    </li>
-                </ul>
-
+                <a class="list-group-item list-group-item-action bg-light" routerLink="/newMerchent" routerLinkActive="">
+                    <i class="fa-solid fa-plus p-1  "></i>
+                    <span class="ms-1 ">Create new Merchent</span>
+                </a>
+                <a class="list-group-item list-group-item-action bg-light" routerLink="/users" routerLinkActive="">
+                    <i class="fa-regular fa-user p-1"></i>
+                    <span class="ms-1 ">All users</span>
+                </a>
+                <a class="list-group-item list-group-item-action bg-light" (click)="logout()" routerLinkActive="">
+    
+                    <i class="fa-solid fa-outdent p-1"></i>
+    
+                    <span class="ms-1 ">Logout</span>
+                </a>
+    
             </div>
         </div>
-        <div class="col  bg-light">
+    
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+    
             <router-outlet></router-outlet>
+    
         </div>
     </div>
 </div>

@@ -1,0 +1,30 @@
+/* Styles for the sidebar */
+#sidebar-wrapper {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  
+  #sidebar-wrapper.collapsed {
+    width: 80px; /* Shrink the sidebar */
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    margin-left: 250px;
+    transition: all 0.3s ease;
+  }
+  
+  #sidebar-wrapper.collapsed ~ #page-content-wrapper {
+    margin-left: 80px; /* Adjust page content when sidebar is collapsed */
+  }
+  
+  .navbar-toggler-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  

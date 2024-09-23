@@ -24,7 +24,8 @@ import { UsersComponent } from './users/users.component';
     NotfoundComponent,
     DashboardComponent,
     CreatenewComponent,
-    UsersComponent
+    UsersComponent,
+    
   ],
   imports: [
     BrowserModule,
