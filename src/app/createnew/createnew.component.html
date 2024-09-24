@@ -1,102 +1,97 @@
-<div class="d-flex align-items-start row formHolder">
-    <div class=" rounded-5 d-flex flex-column col-6 vh-100 w-100  justify-content-around align-items-center">
-        <div class=" col-lg-6 col-md-10 col-sm-12">
-            <div class="
-                      text-center
-                      p-2 
-                      rounded-top-5
-                      text-white 
-                      fw-bolder 
-                      roseirie-background 
-                      fs-5
-                      m-0  
-                      border    
-                   ">
-                <i class="fa fa-user" aria-hidden="true"></i> Create new user
-            </div>
-            <div class="border p-2 bg-white rounded-2">
-                <!-- Method That give me The Object -->
+
+
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100 bg-light mx-0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login-conent-parent">
+
+
+               <div class="login-content">
                 <form class="bg-white rounded-bottom-2" [formGroup]="regeisterNewUser"
-                    (ngSubmit)="createNewUser(regeisterNewUser)">
+                (ngSubmit)="createNewUser(regeisterNewUser)">
 
+                <div class="roseirie-background rounded-1 text-center text-white fs-5 p-2">
+                    Create a new user
+                </div>
 
+                <div class="form-group my-2 ">
+                    <input formControlName="userName" type="text" class="form-control" id="usernameFormControll"
+                        placeholder="Username">
+                </div>
+                <div class="text-danger"
+                    *ngIf="regeisterNewUser.get('userName')?.errors && regeisterNewUser.get('userName')?.touched">
+                    <p *ngIf="regeisterNewUser.get('userName')?.getError('required')">Username Reqired</p>
+                    <p *ngIf="regeisterNewUser.get('userName')?.getError('minlength')">Username minlength 2</p>
+                    <p *ngIf="regeisterNewUser.get('userName')?.getError('maxlength')">Username maxlength 25</p>
 
-                    <div class="form-group my-2 ">
-                        <input formControlName="userName" type="text" class="form-control" id="usernameFormControll"
-                            placeholder="Username">
-                    </div>
-                    <div class="text-danger"
-                        *ngIf="regeisterNewUser.get('userName')?.errors && regeisterNewUser.get('userName')?.touched">
-                        <p *ngIf="regeisterNewUser.get('userName')?.getError('required')">Username Reqired</p>
-                        <p *ngIf="regeisterNewUser.get('userName')?.getError('minlength')">Username minlength 2</p>
-                        <p *ngIf="regeisterNewUser.get('userName')?.getError('maxlength')">Username maxlength 25</p>
+                </div>
 
-                    </div>
+                <div class="form-group my-2 ">
+                    <input formControlName="phoneNumber" type="phone" class="form-control"
+                        id="phoneNumberFormControll" placeholder="Phone Number">
+                </div>
 
-                    <div class="form-group my-2 ">
-                        <input formControlName="phoneNumber" type="phone" class="form-control"
-                            id="phoneNumberFormControll" placeholder="Phone Number">
-                    </div>
+                <div class="text-danger my-2"
+                    *ngIf="regeisterNewUser.get('phoneNumber')?.errors && regeisterNewUser.get('phoneNumber')?.touched">
+                    <p *ngIf="regeisterNewUser.get('phoneNumber')?.getError('required')">Phone number is reqired to
+                        complete registiration</p>
+                    <p *ngIf="regeisterNewUser.get('phoneNumber')?.getError('pattern')">Must Be KSA Num</p>
+                </div>
 
-                    <div class="text-danger my-2"
-                        *ngIf="regeisterNewUser.get('phoneNumber')?.errors && regeisterNewUser.get('phoneNumber')?.touched">
-                        <p *ngIf="regeisterNewUser.get('phoneNumber')?.getError('required')">Phone number is reqired to
-                            complete registiration</p>
-                        <p *ngIf="regeisterNewUser.get('phoneNumber')?.getError('pattern')">Must Be KSA Num</p>
-                    </div>
+                <div class="form-group my-2 ">
+                    <input formControlName="email" type="email" class="form-control" id="emailFormControll"
+                        placeholder="Email">
+                </div>
+                <div class="text-danger"
+                    *ngIf="regeisterNewUser.get('email')?.errors && regeisterNewUser.get('email')?.touched">
+                    <p *ngIf="regeisterNewUser.get('email')?.getError('required')">Email reqired</p>
+                    <p *ngIf="regeisterNewUser.get('email')?.getError('email')">This not an email</p>
+                </div>
 
-                    <div class="form-group my-2 ">
-                        <input formControlName="email" type="email" class="form-control" id="emailFormControll"
-                            placeholder="Email">
-                    </div>  
-                    <div class="text-danger"
-                        *ngIf="regeisterNewUser.get('email')?.errors && regeisterNewUser.get('email')?.touched">
-                        <p *ngIf="regeisterNewUser.get('email')?.getError('required')">Email reqired</p>
-                        <p *ngIf="regeisterNewUser.get('email')?.getError('email')">This not an email</p>
-                    </div>
-
-                    <div class="form-group my-2 ">
-                        <input formControlName="password" type="password" class="form-control" id="passwordFormControll"
-                            placeholder="Password">
-
-                        <div class="text-danger"
-                            *ngIf="regeisterNewUser.get('password')?.errors && regeisterNewUser.get('password')?.touched">
-                            <p *ngIf="regeisterNewUser.get('password')?.getError('required')">Password is reqired
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- <div class="form-group my-2 ">
-                        <input formControlName="rePasword" type="password" class="form-control"
-                            id="rePaswordFormControll" placeholder="Re-Password">
-                        <div class="text-danger"
-                            ngIf="regeisterNewUser.get('rePasword')?.errors && regeisterNewUser.get('rePasword')?.touched">
-                            <p *ngIf="regeisterNewUser.get('rePasword')?.getError('required')">Re-password is reqired
-                            </p>
-                        </div>
-                    </div> -->
-
-                    <div class="form-group my-2 ">
-                        <input formControlName="role" type="text" class="form-control" id="roleFormControll"
-                            placeholder="Role">
-                    </div>
+                <div class="form-group my-2 ">
+                    <input formControlName="password" type="password" class="form-control" id="passwordFormControll"
+                        placeholder="Password">
 
                     <div class="text-danger"
-                        *ngIf="regeisterNewUser.get('role')?.errors && regeisterNewUser.get('role')?.touched">
-                        <p *ngIf="regeisterNewUser.get('role')?.getError('required')">Role is reqired to complete</p>
-                        <p *ngIf="regeisterNewUser.get('role')?.getError('pattern')">Role Must Be Admin Or User</p>
+                        *ngIf="regeisterNewUser.get('password')?.errors && regeisterNewUser.get('password')?.touched">
+                        <p *ngIf="regeisterNewUser.get('password')?.getError('required')">Password is reqired
+                        </p>
                     </div>
+                </div>
 
-                    <div class="text-end p-2">
-                        <button type="submit" class="btn roseirie-background text-white" [disabled]="regeisterNewUser.invalid">
-                            <i *ngIf="isloading" class="fa-solid fa-spinner fa-spin "></i>
-                            <Span *ngIf="!isloading"> Create </Span>
-                        </button>
-                    </div>
-                    <div class="text-danger" *ngIf="errormessage">
-                        Error
-                    </div>
-                </form>
+                <!-- <div class="form-group my-2 ">
+            <input formControlName="rePasword" type="password" class="form-control"
+                id="rePaswordFormControll" placeholder="Re-Password">
+            <div class="text-danger"
+                ngIf="regeisterNewUser.get('rePasword')?.errors && regeisterNewUser.get('rePasword')?.touched">
+                <p *ngIf="regeisterNewUser.get('rePasword')?.getError('required')">Re-password is reqired
+                </p>
+            </div>
+        </div> -->
+
+                <div class="form-group my-2 ">
+                    <input formControlName="role" type="text" class="form-control" id="roleFormControll"
+                        placeholder="Role">
+                </div>
+
+                <div class="text-danger"
+                    *ngIf="regeisterNewUser.get('role')?.errors && regeisterNewUser.get('role')?.touched">
+                    <p *ngIf="regeisterNewUser.get('role')?.getError('required')">Role is reqired to complete</p>
+                    <p *ngIf="regeisterNewUser.get('role')?.getError('pattern')">Role Must Be Admin Or User</p>
+                </div>
+
+                <div class="text-end p-2">
+                    <button type="submit" class="btn roseirie-background text-white"
+                        [disabled]="regeisterNewUser.invalid">
+                        <i *ngIf="isloading" class="fa-solid fa-spinner fa-spin "></i>
+                        <Span *ngIf="!isloading"> Create </Span>
+                    </button>
+                </div>
+                <div class="text-danger" *ngIf="errormessage">
+                    Error
+                </div>
+            </form>
+               </div>
             </div>
         </div>
     </div>
