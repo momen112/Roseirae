@@ -1,33 +1,35 @@
-<div class="container-fluid p-0">
-    <table class="table table-striped text-center">
-        <thead>
-            <tr>
-          
-                <th>Username</th>
-                <th>Email</th>
-                <th>Phone number</th>
-                <th>Role</th>
-                <th>Operation</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td>{{ user.userName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.phoneNumber }}</td>
-                <td>{{ user.role }}</td>
-         
-                <td>
-                    <div class="row d-flex flex-row justify-content-around">
-                        <button class="btn btn-warning col-6" (click)="editUser(user)"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-danger col-4" (click)="deleteUser(user)"><i class="fa-solid fa-trash"></i></button>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container-fluid px-0">
+    <div class="table-responsive">
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+              
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Role</th>
+                    <th>Operation</th>
+    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phoneNumber }}</td>
+                    <td>{{ user.role }}</td>
+             
+                    <td>
+                        <div class="row d-flex flex-row justify-content-around">
+                            <button class="btn btn-warning col-6" (click)="editUser(user)"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="btn btn-danger col-4" (click)="deleteUser(user.userId)"><i class="fa-solid fa-trash"></i></button>
+    
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
  

@@ -3,42 +3,55 @@
 
     <div *ngIf="isLogin" class="d-flex">
         <!-- Sidebar -->
-        <div class="bg-white border-right" id="sidebar-wrapper" [ngClass]="{'collapsed': !isSidebarOpen}">
+        <div class="bg-light border-right border" id="sidebar-wrapper" [ngClass]="{'collapsed': !isSidebarOpen}">
             <!-- Menu Icon -->
-            <div class="sidebar-heading d-flex justify-content-end p-2">
-                <span class="navbar-toggler-icon" id="menu-icon" (click)="toggleSidebar()" style="cursor: pointer;">
-                    <i class="fa-solid fa-bars"></i>
-                </span>
+            <div class="sidebar-heading d-flex  align-items-center w-100"
+                [ngClass]="{'justify-content-center': !isSidebarOpen, ' justify-content-between px-lg-2': isSidebarOpen}">
+
+                <div [ngClass]="{'d-none': !isSidebarOpen, 'd-flex': isSidebarOpen}">
+                    <img src="../../assets/images/logo.png" class="handle-img-logo py-1" alt="Logo">
+                </div>
+
+                <div [ngClass]="{'d-none': !isSidebarOpen, 'd-flex': isSidebarOpen}">
+                    <p class="my-auto fs-5 fw-bold">ROSAIREA</p>
+                </div>
+
+                <div>
+                    <span class="navbar-toggler-icon text-center" id="menu-icon" (click)="toggleSidebar()"
+                        style="cursor: pointer;">
+                        <i class="fa-solid fa-bars"></i>
+                    </span>
+                </div>
             </div>
+
             <div class="list-group list-group-flush" *ngIf="isSidebarOpen">
-    
-                <a class="list-group-item list-group-item-action bg-white" routerLink="/dashboard" routerLinkActive="">
+
+                <a class="list-group-item list-group-item-action " routerLink="/dashboard"
+                    routerLinkActive="active-link">
                     <i class="fa-solid fa-chart-line p-1"></i>
-                    <span class="ms-1 ">Dashboard</span>
+                    <span class="ms-1">Dashboard</span>
                 </a>
-                <a class="list-group-item list-group-item-action bg-white" routerLink="/newMerchent" routerLinkActive="">
-                    <i class="fa-solid fa-plus p-1  "></i>
-                    <span class="ms-1 ">Create new Merchent</span>
+                <a class="list-group-item list-group-item-action " routerLink="/newMerchent"
+                    routerLinkActive="active-link">
+                    <i class="fa-solid fa-plus p-1"></i>
+                    <span class="ms-1">Create new Merchant</span>
                 </a>
-                <a class="list-group-item list-group-item-action bg-white" routerLink="/users" routerLinkActive="">
+                <a class="list-group-item list-group-item-action " routerLink="/users" routerLinkActive="active-link">
                     <i class="fa-regular fa-user p-1"></i>
-                    <span class="ms-1 ">All users</span>
+                    <span class="ms-1">All users</span>
                 </a>
-                <a class="list-group-item list-group-item-action bg-white" (click)="logout()" routerLinkActive="">
-    
+                <a style="cursor: pointer;" class="list-group-item list-group-item-action " (click)="logout()"
+                    routerLinkActive="active-link">
                     <i class="fa-solid fa-outdent p-1"></i>
-    
-                    <span class="ms-1 ">Logout</span>
+                    <span class="ms-1">Logout</span>
                 </a>
-    
+
             </div>
         </div>
-    
+
         <!-- Page Content -->
         <div id="page-content-wrapper">
-    
             <router-outlet></router-outlet>
-    
         </div>
     </div>
 </div>

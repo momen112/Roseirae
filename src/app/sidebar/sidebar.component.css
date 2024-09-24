@@ -28,3 +28,30 @@
     cursor: pointer;
   }
   
+
+  /* Style for active link */
+.active-link {
+  background-color: #09BBF0;
+  /* Change this to the color you prefer */
+  color: white; /* Text color for active link */
+}
+
+.active-link i {
+  color: white; /* Change icon color for active link */
+}
+
+.list-group-item {
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for the hover effect */
+}
+
+.list-group-item:hover {
+  background-color: #f1f1f1; /* Optional: Hover effect */
+}
+.roseirie-background {
+  background-color: #09BBF0;
+}
+
+.handle-img-logo{
+  width: 50px;
+  height: 50px;
+}

@@ -12,6 +12,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatenewComponent } from './createnew/createnew.component';
 import { UsersComponent } from './users/users.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -19,13 +21,13 @@ import { UsersComponent } from './users/users.component';
     SidebarComponent,
     AppComponent,
     LoginComponent,
-
     ForgetpassComponent,
     NotfoundComponent,
     DashboardComponent,
     CreatenewComponent,
     UsersComponent,
-    
+
+
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { UsersComponent } from './users/users.component';
     ReactiveFormsModule,
     // Not auto Imported
     HttpClientModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
