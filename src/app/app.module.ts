@@ -7,12 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 
-import { ForgetpassComponent } from './forgetpass/forgetpass.component';
+
 import { NotfoundComponent } from './notfound/notfound.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatenewComponent } from './createnew/createnew.component';
 import { UsersComponent } from './users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 
@@ -21,11 +22,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SidebarComponent,
     AppComponent,
     LoginComponent,
-    ForgetpassComponent,
+  
     NotfoundComponent,
     DashboardComponent,
     CreatenewComponent,
     UsersComponent,
+    EditUserComponent,
+  
 
 
   ],

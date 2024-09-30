@@ -1,0 +1,16 @@
+.modal-header {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    border-top: none;
+  }
+  .roseirie-background {
+    background-color: #09BBF0;
+  }
+

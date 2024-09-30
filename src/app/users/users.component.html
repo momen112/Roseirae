@@ -1,35 +1,117 @@
-<div class="container-fluid px-0">
-    <div class="table-responsive">
-        <table class="table table-striped text-center">
-            <thead>
-                <tr>
-              
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Phone number</th>
-                    <th>Role</th>
-                    <th>Operation</th>
-    
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let user of users">
-                    <td>{{ user.userName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phoneNumber }}</td>
-                    <td>{{ user.role }}</td>
-             
-                    <td>
-                        <div class="row d-flex flex-row justify-content-around">
-                            <button class="btn btn-warning col-6" (click)="editUser(user)"><i class="fa-solid fa-pen-to-square"></i></button>
-                            <button class="btn btn-danger col-4" (click)="deleteUser(user.userId)"><i class="fa-solid fa-trash"></i></button>
-    
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="container-fluid my-2 ">
+    <div class="row justify-content-around">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 " *ngFor="let user of users">
+            <div class="card shadow-lg rounded-lg mb-4  mx-auto" style="max-width: 100%; width: 18rem;">
+                <img class="handle-img-icon mx-auto p-1" src="../../assets/images/{{user.role}}.png"
+                    alt="{{ user.userName }}" />
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-2">{{ user.userName }}</h5>
+                    <p class="card-text text-muted mb-1">Email: {{ user.email }}</p>
+                    <p class="card-text text-muted">Phone: {{ user.phoneNumber }}</p>
+                    <p class="card-text text-muted">Role: {{ user.role }}</p>
+
+                    <!-- Buttons for Actions -->
+                    <div class="row d-flex justify-content-center mb-2 w-100 mx-auto">
+                        <button class="btn btn-warning col-5 mx-1" (click)="openModal(user.userId)">
+                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                        </button>
+                        <button class="btn btn-danger col-5 mx-1" (click)="deleteUser(user.userId)">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </div>
+                    <div class="row d-flex justify-content-center w-100 mx-auto">
+                        <button class="btn btn-primary col-10" (click)="suspendUser(user.userId)">
+                            <i class="fa-solid fa-user-slash"></i> Suspend this Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
- 
+
+
+
+<!-- Modal (conditionally rendered based on modalVisible) -->
+<div *ngIf="modalVisible" class="modal fade show d-block" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 rounded-lg shadow-lg">
+            <div class="modal-header border-bottom-2 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title col-10">Edit User <span class="text-warning fw-bold">{{selectedUserName}}</span>
+                </h5>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body px-4 py-3">
+                <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group mb-4">
+                        <label for="userName" class="font-weight-bold">User Name</label>
+                        <input type="text" id="userName" class="form-control" formControlName="userName"
+                            placeholder="Enter user name">
+                        <div *ngIf="editUserForm.get('userName')?.invalid && (editUserForm.get('userName')?.touched || editUserForm.get('userName')?.dirty)"
+                            class="text-danger small mt-1">
+                            <div *ngIf="editUserForm.get('userName')?.getError('required')">User Name is required.</div>
+                            <div *ngIf="editUserForm.get('userName')?.getError('minlength')">User Name must be at least
+                                2 characters long.</div>
+                            <div *ngIf="editUserForm.get('userName')?.getError('maxlength')">User Name cannot exceed 25
+                                characters.</div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="email" class="font-weight-bold">Email</label>
+                        <input type="email" id="email" class="form-control" formControlName="email"
+                            placeholder="Enter email">
+                        <div *ngIf="editUserForm.get('email')?.invalid && (editUserForm.get('email')?.touched || editUserForm.get('email')?.dirty)"
+                            class="text-danger small mt-1">
+                            <div *ngIf="editUserForm.get('email')?.getError('required')">Email is required.</div>
+                            <div *ngIf="editUserForm.get('email')?.getError('email')">Please enter a valid email.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group my-2 ">
+                        <label for="email" class="font-weight-bold">Password</label>
+
+                        <input formControlName="password" type="password" class="form-control" id="passwordFormControll"
+                            placeholder="Password">
+
+                        <div class="text-danger"
+                            *ngIf="editUserForm.get('password')?.errors && editUserForm.get('password')?.touched">
+                            <p *ngIf="editUserForm.get('password')?.getError('required')">Password is reqired
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="phoneNumber" class="font-weight-bold">Phone Number</label>
+                        <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber"
+                            placeholder="Enter phone number">
+                        <div *ngIf="editUserForm.get('phoneNumber')?.invalid && (editUserForm.get('phoneNumber')?.touched || editUserForm.get('phoneNumber')?.dirty)"
+                            class="text-danger small mt-1">
+                            <div *ngIf="editUserForm.get('phoneNumber')?.getError('required')">Phone Number is required.
+                            </div>
+                            <div *ngIf="editUserForm.get('phoneNumber')?.getError('pattern')">Invalid phone number
+                                format.</div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="role" class="font-weight-bold">Role</label>
+                        <input type="text" id="role" class="form-control" formControlName="role"
+                            placeholder="Enter role">
+                        <div *ngIf="editUserForm.get('role')?.invalid && (editUserForm.get('role')?.touched || editUserForm.get('role')?.dirty)"
+                            class="text-danger small mt-1">
+                            <div *ngIf="editUserForm.get('role')?.getError('required')">Role is required.</div>
+                            <div *ngIf="editUserForm.get('role')?.getError('pattern')">Role must be either Admin or
+                                User.</div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-success" [disabled]="editUserForm.invalid">Save
+                            Changes</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

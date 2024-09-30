@@ -4,49 +4,161 @@
             <div class="col-md-6 login-conent-parent">
 
 
-               <div class="login-content">
-                <form [formGroup]="loginExistUser" (ngSubmit)="loginUser(loginExistUser)">
-                    <div class="text-center login-logo">
-                        <a href="#">
-                            <img src="../../assets/images/logo.png" width="150" height="150" class="rounded">
-                        </a>
-                    </div>
+                <div class="login-content">
+                    <form [formGroup]="loginExistUser" (ngSubmit)="loginUser(loginExistUser)">
+                        <div class="text-center login-logo">
+                            <a href="#">
+                                <img src="../../assets/images/logo.png" width="150" height="150" class="rounded">
+                            </a>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <input formControlName="userName" type="text" class="form-control" id="usernameFormControll"
-                            placeholder="Username" />
-                        <div class="text-danger"
-                            *ngIf="loginExistUser.get('userName')?.errors && loginExistUser.get('userName')?.touched">
-                            <p *ngIf="loginExistUser.get('userName')?.getError('required')">Username is required</p>
-                            <p *ngIf="loginExistUser.get('userName')?.getError('minlength')">Username must be at least 2
-                                characters</p>
-                            <p *ngIf="loginExistUser.get('userName')?.getError('maxlength')">Username cannot exceed 25
-                                characters</p>
+                        <div class="form-group mb-3">
+                            <input formControlName="userName" type="text" class="form-control" id="usernameFormControll"
+                                placeholder="Username" />
+                            <div class="text-danger"
+                                *ngIf="loginExistUser.get('userName')?.errors && loginExistUser.get('userName')?.touched">
+                                <p *ngIf="loginExistUser.get('userName')?.getError('required')">Username is required</p>
+                                <p *ngIf="loginExistUser.get('userName')?.getError('minlength')">Username must be at
+                                    least 2
+                                    characters</p>
+                                <p *ngIf="loginExistUser.get('userName')?.getError('maxlength')">Username cannot exceed
+                                    25
+                                    characters</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <input formControlName="password" type="password" class="form-control"
+                                id="passwordFormControll" placeholder="Password" />
+                            <div class="text-danger"
+                                *ngIf="loginExistUser.get('password')?.errors && loginExistUser.get('password')?.touched">
+                                <p *ngIf="loginExistUser.get('password')?.getError('required')">Password is required</p>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <button class="btn btn-link" (click)="openPasswordRecoveryModal()">Forgot Password</button>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn roseirie-background text-white"
+                                [disabled]="loginExistUser.invalid">
+                                <i *ngIf="isloading" class="fa-solid fa-spinner fa-spin"></i>
+                                <span *ngIf="!isloading">Login</span>
+                            </button>
+                        </div>
+
+                        <div class="text-danger text-center mt-3" *ngIf="errormessage">
+                            Wrong username or Password
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="modalVisible" class="modal fade show d-block" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 rounded-lg shadow-lg">
+            <div
+                class="modal-header roseirie-background text-dark border-bottom-2 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title text-white">
+                    Password recovery page
+                </h5>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4 py-3">
+                <form [formGroup]="recoveryForm" (ngSubmit)="sendOtp()">
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-control my-3" formControlName="email"
+                            placeholder="Enter your e-mail">
+                        <div *ngIf="recoveryForm.get('email')?.invalid && recoveryForm.get('email')?.touched"
+                            class="text-danger">
+                            <div *ngIf="recoveryForm.get('email')?.getError('required')">Please enter your email.</div>
+                            <div *ngIf="recoveryForm.get('email')?.getError('email')">Please enter a valid email.</div>
+                        </div>
+                        <div *ngIf="passwordStatusMessage" class="roseirie-background rounded my-3 p-2 text-white">
+                            {{passwordStatusMessage}}
                         </div>
                     </div>
-
-                    <div class="form-group mb-4">
-                        <input formControlName="password" type="password" class="form-control" id="passwordFormControll"
-                            placeholder="Password" />
-                        <div class="text-danger"
-                            *ngIf="loginExistUser.get('password')?.errors && loginExistUser.get('password')?.touched">
-                            <p *ngIf="loginExistUser.get('password')?.getError('required')">Password is required</p>
-                        </div>
-                    </div>
-
-                    <div class="text-end">
-                        <button type="submit" class="btn roseirie-background text-white"
-                            [disabled]="loginExistUser.invalid">
-                            <i *ngIf="isloading" class="fa-solid fa-spinner fa-spin"></i>
-                            <span *ngIf="!isloading">Login</span>
-                        </button>
-                    </div>
-
-                    <div class="text-danger text-center mt-3" *ngIf="errormessage">
-                        Wrong username or Password
-                    </div>
+                    <button type="submit" class="btn roseirie-background text-white border-0 shadow"
+                        [disabled]="recoveryForm.invalid">Send OTP</button>
                 </form>
-               </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div *ngIf="openVerifyingModal" class="modal fade show d-block" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 rounded-lg shadow-lg">
+            <div
+                class="modal-header roseirie-background text-dark border-bottom-2 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title text-white">
+                    Verify The OTP
+                </h5>
+                <button type="button" class="btn-close" (click)="closeVerifyModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4 py-3">
+                <form [formGroup]="VerificationForm" (ngSubmit)="sendVerification()">
+                    <div class="form-group">
+                        <input type="text" id="text" class="form-control my-3" formControlName="otp"
+                            placeholder="Enter the OTP">
+                        <div *ngIf="VerificationForm.get('otp')?.invalid && VerificationForm.get('otp')?.touched"
+                            class="text-danger">
+                            <div *ngIf="VerificationForm.get('otp')?.getError('required')">Enter The OTP to continue
+                            </div>
+                        </div>
+                        <div *ngIf="otpStatusMessage" class="roseirie-background rounded my-3 p-2 text-white">
+                            {{otpStatusMessage}}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn roseirie-background text-white border-0 shadow"
+                        [disabled]="VerificationForm.invalid">Verify</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="openResettPassword" class="modal fade show d-block" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 rounded-lg shadow-lg">
+            <div
+                class="modal-header roseirie-background text-dark border-bottom-2 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title text-white">
+                    Resset password
+                </h5>
+                <button type="button" class="btn-close" (click)="closeResetPassword()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-4 py-3">
+                <form [formGroup]="ResettPaswordFrom" (ngSubmit)="ResettPaswordNow()">
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-control my-3" formControlName="newPassword"
+                            placeholder="Enter new password">
+                        <div *ngIf="ResettPaswordFrom.get('newPassword')?.invalid && ResettPaswordFrom.get('newPassword')?.touched"
+                            class="text-danger">
+                            <div *ngIf="ResettPaswordFrom.get('newPassword')?.getError('required')">Password is required</div>
+                        </div>
+
+                        <input type="password" id="repassword" class="form-control my-3" formControlName="confirmPassword"
+                            placeholder="Confirm new password">
+                        <div *ngIf="ResettPaswordFrom.get('confirmPassword')?.invalid && ResettPaswordFrom.get('confirmPassword')?.touched"
+                            class="text-danger">
+                            <div *ngIf="ResettPaswordFrom.get('confirmPassword')?.getError('required')">Re-Password is required</div>
+                        </div>
+                        
+
+                    </div>
+                    <button type="submit" class="btn roseirie-background text-white border-0 shadow"
+                        [disabled]="ResettPaswordFrom.invalid">Reset Now </button>
+                </form>
             </div>
         </div>
     </div>
